@@ -7,7 +7,6 @@ package br.com.magazine.teste;
 
 import br.com.magazine.entidade.Cliente;
 import br.com.magazine.entidade.ListaGeneros;
-import com.google.gson.Gson;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;

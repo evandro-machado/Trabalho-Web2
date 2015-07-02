@@ -53,13 +53,13 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="item active">
-                                        <img class="slide-image" src="${pageContext.request.contextPath}/Imagens/5.jpg" alt="" style="width: 400px; height: 300px;">
+                                        <img class="slide-image" src="${pageContext.request.contextPath}/Imagens/5.jpg" alt="" style="width: 400px; height: 500px;">
                                     </div>
                                     <div class="item">
-                                        <img class="slide-image" src="${pageContext.request.contextPath}/Imagens/2.jpg" alt="" style="width: 400px; height: 300px;">
+                                        <img class="slide-image" src="${pageContext.request.contextPath}/Imagens/2.jpg" alt="" style="width: 400px; height: 500px;">
                                     </div>
                                     <div class="item">
-                                        <img class="slide-image" src="${pageContext.request.contextPath}/Imagens/3.jpg" alt="" style="width: 400px; height: 300px;">
+                                        <img class="slide-image" src="${pageContext.request.contextPath}/Imagens/3.jpg" alt="" style="width: 400px; height: 500px;">
                                     </div>
                                 </div>
                                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

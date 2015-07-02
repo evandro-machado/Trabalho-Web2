@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Cadastro de Cliente</title>
+        <title>Alterar Cliente</title>
             
         <!--JQuery CSS-->
         <link rel="stylesheet" href="../js/jquery-ui.css">
@@ -132,7 +132,6 @@
             <div class=" col-sm-offset-3 col-sm-6">
         <h1>Dados Cadastrais</h1>
         <form class="form-horizontal" id="form" method="POST" action="../cliente/Clientes?action=alterar" onsubmit="//return valida(this);">
-            <input type="hidden" id="idCliente" value ="">
             <div class="form-group">
                 <label for="" class="col-sm-4 control-label">Nome Completo</label>
                 <div class="col-sm-8">
@@ -227,7 +226,7 @@
                 <label for="" class="col-sm-4 control-label">Estado</label>
                 <div class="col-sm-8">
                     <input type="text" name="estado" class="form-control" value="${cliente.estado}" id="estado" placeholder="" required />
-                    <input type="hidden" value="${cliente.id}" name="idCliente"/>
+                    <input type="hidden" value="${cliente.idCliente}" name="idCliente"/>
                 </div>
             </div> 
             <div class="form-group">

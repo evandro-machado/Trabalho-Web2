@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Magazine Store</title>
+        <title>Visualizar Compra</title>
 
         <!-- Bootstrap -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -101,12 +101,12 @@
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                                                     </div>
                                                                     <div class="col-md-2 col-md-offset-3">
-                                                                        <a href="Clientes?action=cancelarRecebimento&id=${pedido.idPedido}">
+                                                                        <a href="Clientes?action=cancelar&id=${pedido.idPedido}">
                                                                         <button type="button" class="btn btn-danger">Cancelar Pedido</button>
                                                                         </a>
                                                                     </div>
                                                                     <div class="col-md-2 col-md-offset-1">
-                                                                        <a href="Clientes?action=confirmar&id=${pedido.idPedido}">
+                                                                        <a href="Clientes?action=confirmarRecebimento&id=${pedido.idPedido}">
                                                                         <button type="button" class="btn btn-success">Confirmar Recebimento</button>
                                                                         </a>
                                                                     </div>

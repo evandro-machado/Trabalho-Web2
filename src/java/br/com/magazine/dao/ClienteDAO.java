@@ -40,7 +40,7 @@ public class ClienteDAO {
     private final String stmtBuscarCPFFuncionario = "select * from Cliente where cpf ilike ? and perfil in (2,3) and inativo=false order by nome";
     private final String stmtBuscarEmailFuncionario = "select * from Cliente where email ilike ? and perfil in (2,3) and inativo=false order by nome";
 
-    private final String stmtBuscarEmailExato = "select * from Cliente where email = ?";
+    private final String stmtBuscarEmailExato = "select * from Cliente where email = ? and inativo = false";
 //    private final String stmtProcuraSobreNome = "select * from Cliente where sobrenome like ";
 //    private final String stmtProcuraCPF = "select * from Cliente where cpf like ";
 
@@ -186,7 +186,6 @@ public class ClienteDAO {
             clienteRetorno.setCidade(rs.getString("cidade"));
             clienteRetorno.setEstado(rs.getString("estado"));
             clienteRetorno.setPerfil(rs.getInt("perfil"));
-
             return clienteRetorno;
         } catch (SQLException e) {
             throw new RuntimeException(e);

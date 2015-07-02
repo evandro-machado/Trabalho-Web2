@@ -59,58 +59,63 @@ public class Clientes extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            if ("cadastrar".equals(request.getParameter("action"))) {
+                Cliente cliente = new Cliente();
+
+                cliente.setNome(request.getParameter("nome"));
+                cliente.setSexo(request.getParameter("sexo"));
+                cliente.setCpf(request.getParameter("cpf"));
+
+                String nascimentoStr = request.getParameter("nascimento");
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                java.util.Date nascimentoUtil = format.parse(nascimentoStr);
+                java.sql.Date nascimentoSql = new java.sql.Date(nascimentoUtil.getTime());
+                cliente.setNascimento(nascimentoSql);
+
+                cliente.setTelefone(request.getParameter("telefone"));
+                cliente.setEmail(request.getParameter("email"));
+                cliente.setSenha(request.getParameter("senha"));
+                cliente.setCep(request.getParameter("cep"));
+                cliente.setEndereco(request.getParameter("endereco"));
+                cliente.setEndNumero(request.getParameter("numero"));
+                cliente.setEndComplemento(request.getParameter("complemento"));
+                cliente.setBairro(request.getParameter("bairro"));
+                cliente.setCidade(request.getParameter("cidade"));
+                cliente.setEstado(request.getParameter("estado"));
+                cliente.setPerfil(1);
+
+                ClienteDAO clienteDAO = new ClienteDAO();
+                int idCliente = clienteDAO.cadastrarCliente(cliente);
+                Log log = new Log();
+                log.setAcao("Cliente cadastrado");
+                log.setPagina("/cliente/cadastrarCliente.jsp");
+                Timestamp dataLog = new Timestamp(System.currentTimeMillis());
+                log.setData(dataLog);
+                log.setIdCliente(idCliente);
+                LogDAO logDAO = new LogDAO();
+                logDAO.insereLog(log);
+            }
             HttpSession session = request.getSession();
             int logado;
             int perfil;
+            int idCliente;
             try {
                 logado = (int) session.getAttribute("logado");
                 perfil = (int) session.getAttribute("perfil");
+                idCliente = (int) session.getAttribute("idcliente");
             } catch (Exception f) {
                 logado = 0;
                 perfil = 0;
+                idCliente = 0;
             }
 
             if (logado > 0 && perfil == 1) {
-                System.out.println(logado +" "+ perfil);
-                if ("cadastrar".equals(request.getParameter("action"))) {
-                    Cliente cliente = new Cliente();
+                System.out.println(logado + " " + perfil);
 
-                    cliente.setNome(request.getParameter("nome"));
-                    cliente.setSexo(request.getParameter("sexo"));
-                    cliente.setCpf(request.getParameter("cpf"));
-
-                    String nascimentoStr = request.getParameter("nascimento");
-                    DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                    java.util.Date nascimentoUtil = format.parse(nascimentoStr);
-                    java.sql.Date nascimentoSql = new java.sql.Date(nascimentoUtil.getTime());
-                    cliente.setNascimento(nascimentoSql);
-
-                    cliente.setTelefone(request.getParameter("telefone"));
-                    cliente.setEmail(request.getParameter("email"));
-                    cliente.setSenha(request.getParameter("senha"));
-                    cliente.setCep(request.getParameter("cep"));
-                    cliente.setEndereco(request.getParameter("endereco"));
-                    cliente.setEndNumero(request.getParameter("numero"));
-                    cliente.setEndComplemento(request.getParameter("complemento"));
-                    cliente.setBairro(request.getParameter("bairro"));
-                    cliente.setCidade(request.getParameter("cidade"));
-                    cliente.setEstado(request.getParameter("estado"));
-
-                    ClienteDAO clienteDAO = new ClienteDAO();
-                    int idCliente = clienteDAO.cadastrarCliente(cliente);
-                    Log log = new Log();
-                    log.setAcao("Cliente cadastrado");
-                    log.setPagina("/cliente/cadastrarCliente.jsp");
-                    Timestamp dataLog = new Timestamp(System.currentTimeMillis());
-                    log.setData(dataLog);
-                    log.setIdCliente(idCliente);
-                    LogDAO logDAO = new LogDAO();
-                    logDAO.insereLog(log);
-                }
                 if ("alterarPerfil".equals(request.getParameter("action"))) {
                     ClienteDAO clienteDAO = new ClienteDAO();
                     Cliente clienteSessao = new Cliente();
-                    clienteSessao.setIdCliente(3);
+                    clienteSessao.setIdCliente(idCliente);
                     Cliente cliente = clienteDAO.buscarClienteId(clienteSessao);
                     request.setAttribute("cliente", cliente);
 //                response.sendRedirect("./alterarCliente.jsp");
@@ -151,7 +156,7 @@ public class Clientes extends HttpServlet {
                     log.setPagina("/cliente/alterarPerfil.jsp");
                     Timestamp dataLog = new Timestamp(System.currentTimeMillis());
                     log.setData(dataLog);
-                    log.setIdCliente(3);
+                    log.setIdCliente(idCliente);
                     LogDAO logDAO = new LogDAO();
                     logDAO.insereLog(log);
 
@@ -169,11 +174,13 @@ public class Clientes extends HttpServlet {
                     log.setPagina("/cliente/menuCliente.jsp");
                     Timestamp dataLog = new Timestamp(System.currentTimeMillis());
                     log.setData(dataLog);
-                    log.setIdCliente(3);
+                    log.setIdCliente(idCliente);
                     LogDAO logDAO = new LogDAO();
                     logDAO.insereLog(log);
 
                     clienteDAO.removerCliente(cliente);
+                    response.sendRedirect("../comum/Login?action=logout");
+                    return;
                 }
                 if ("nomeAZ".equals(request.getParameter("action"))) {
                     ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -240,7 +247,7 @@ public class Clientes extends HttpServlet {
                     log.setPagina("/cliente/visualizarPedidos.jsp");
                     Timestamp dataLog = new Timestamp(System.currentTimeMillis());
                     log.setData(dataLog);
-                    log.setIdCliente(3);
+                    log.setIdCliente(idCliente);
                     LogDAO logDAO = new LogDAO();
                     logDAO.insereLog(log);
 
@@ -262,7 +269,7 @@ public class Clientes extends HttpServlet {
                     log.setPagina("/cliente/visualizarPedidos.jsp");
                     Timestamp dataLog = new Timestamp(System.currentTimeMillis());
                     log.setData(dataLog);
-                    log.setIdCliente(3);
+                    log.setIdCliente(idCliente);
                     LogDAO logDAO = new LogDAO();
                     logDAO.insereLog(log);
 
@@ -287,7 +294,7 @@ public class Clientes extends HttpServlet {
                     Timestamp dataLog = new Timestamp(System.currentTimeMillis());
                     log.setData(dataLog);
                     log.setIdProduto(id);
-                    log.setIdCliente(3);
+                    log.setIdCliente(idCliente);
                     LogDAO logDAO = new LogDAO();
                     logDAO.insereLog(log);
 

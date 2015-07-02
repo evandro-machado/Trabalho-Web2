@@ -7,7 +7,7 @@
         <a href="./Clientes" class="list-group-item">Inicio</a>
         <a href="./Clientes?action=pesquisarProduto" class="list-group-item">Pesquisar Produtos</a>
         <a href="Clientes?action=pedidos" class="list-group-item">Visualizar Compras</a>
-        <a href="" data-toggle="modal" data-target="#exampleModal" data-idcliente="${cliente.idCliente}" class="list-group-item">Excluir Conta</a>
+        <a href="" data-toggle="modal" data-target="#exampleModal" data-idcliente="${sessionScope.cliente.idCliente}" class="list-group-item">Excluir Conta</a>
 
 
     </div>
@@ -23,7 +23,7 @@
             <div class="modal-body">
                 <form action="Clientes?action=excluir" method="post">
                     <div class="form-group">
-                        <input type="hidden" class="form-control" id="cliente-id" name="cliente-id"></textarea>
+                        <input type="hidden" class="form-control" id="cliente-id" value="${sessionScope.cliente.idCliente}" name="cliente-id"></textarea>
                     </div>                            
                     <div class="form-group">
                         <label for="genero-nome" class="control-label">Tem certeza de que deseja excluir sua conta?</label>
@@ -32,6 +32,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Nao</button>
                         <button type="submit" class="btn btn-primary">Sim</button>
                     </div>
+
 
                 </form>
             </div>
